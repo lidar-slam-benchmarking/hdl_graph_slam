@@ -2,6 +2,9 @@
 
 ***Disclaimer:*** The original work can be found at https://github.com/koide3/hdl_graph_slam and we take no credit for the author's work.
 
+Kenji Koide, Active Intelligent Systems Laboratory, Toyohashi University of Technology <a href="http://www.aisl.cs.tut.ac.jp">[URL]</a> <br>
+koide@aisl.cs.tut.ac.jp
+
 hdl_graph_slam is an open source ROS package for real-time 3D slam using a 3D LIDAR. It is based on 3D Graph SLAM with NDT scan matching-based odometry estimation and loop detection. It also utilizes floor plane detection to generate an environmental map with a completely flat floor. We have tested this packaged mainly in indoor environments, but it can be applied to outdoor environment mapping as well.
 
 ## Results
@@ -55,91 +58,17 @@ git clone https://github.com/koide3/ndt_omp.git
 sudo pip install ProgressBar2
 ```
 
-## Example1 (Indoor)
-
-Example bag files (recorded in a small room): 
-- [hdl_501.bag.tar.gz](http://www.aisl.cs.tut.ac.jp/databases/hdl_graph_slam/hdl_501.bag.tar.gz) (raw data, 344MB)
-- [hdl_501_filtered.bag.tar.gz](http://www.aisl.cs.tut.ac.jp/databases/hdl_graph_slam/hdl_501_filtered.bag.tar.gz) (downsampled data, 57MB, **Recommended!**)
+## Husky Dataset Instructions
+Download [husky.bag](https://drive.google.com/file/d/1QqVY7z-3ojrfrI3Q6LTY4Ui_0nkOpEqO/view?usp=sharing) into catkin_ws/bags/
 
 ```bash
-rosparam set use_sim_time true
-roslaunch hdl_graph_slam hdl_graph_slam_501.launch
+roslaunch hdl_graph_slam husky.launch
+rosrun hdl_graph_slam bag_player.py bags/husky.bag
 ```
+
+## Quad Dataset Instructions
+Download [nardos3.bag](https://drive.google.com/file/d/1jjilcRgPEUWECLCSd0r0EZuduAeX_RGM/view?usp=sharing) into catkin_ws/bags/
 
 ```bash
-roscd hdl_graph_slam/rviz
-rviz -d hdl_graph_slam.rviz
+roslaunch hdl_graph_slam nardos.launch
 ```
-
-```bash
-rosbag play --clock hdl_501_filtered.bag
-```
-
-We also provide bag_player.py which adjusts the playback speed according to the processing speed of your PC. It allows processing data as fast as possible for your PC.
-
-```bash
-rosrun hdl_graph_slam bag_player.py hdl_501_filtered.bag
-```
-
-You'll see a generated point cloud like:
-
-<img src="imgs/top.png" height="256pix" /> <img src="imgs/birds.png" height="256pix" /> 
-
-You can save the generated map by:
-```bash
-rosservice call /hdl_graph_slam/save_map "resolution: 0.05
-destination: '/full_path_directory/map.pcd'"
-```
-
-## Example2 (Outdoor)
-
-Bag file (recorded in an outdoor environment): 
-- [hdl_400.bag.tar.gz](http://www.aisl.cs.tut.ac.jp/databases/hdl_graph_slam/hdl_400.bag.tar.gz) (raw data, about 900MB)
-
-
-```bash
-rosparam set use_sim_time true
-roslaunch hdl_graph_slam hdl_graph_slam_400.launch
-```
-
-```bash
-roscd hdl_graph_slam/rviz
-rviz -d hdl_graph_slam.rviz
-```
-
-```bash
-rosbag play --clock hdl_400.bag
-```
-
-
-<img src="imgs/hdl_400_points.png" height="256pix" /> <img src="imgs/hdl_400_graph.png" height="256pix" /> 
-
-
-## Example with GPS feature
-Ford Campus Vision and Lidar Data Set <a href="http://robots.engin.umich.edu/SoftwareData/Ford">[URL]</a>.
-
-The following script converts the Ford Lidar Dataset to a rosbag and plays it. In this example, ***hdl_graph_slam*** utilized the GPS data to correct the pose graph.
-
-```bash
-cd IJRR-Dataset-2
-rosrun hdl_graph_slam ford2bag.py dataset-2.bag
-rosrun hdl_graph_slam bag_player.py dataset-2.bag
-```
-
-<img src="imgs/ford1.png" height="200pix"/> <img src="imgs/ford2.png" height="200pix"/> <img src="imgs/ford3.png" height="200pix"/>
-
-## Related packages
-
-- <a href="https://github.com/koide3/hdl_graph_slam">hdl_graph_slam</a>
-- <a href="https://github.com/koide3/hdl_localization">hdl_localization</a>
-- <a href="https://github.com/koide3/hdl_people_tracking">hdl_people_tracking</a>
-
-<img src="imgs/packages.png"/>
-
-## Papers
-Kenji Koide, Jun Miura, and Emanuele Menegatti, A Portable 3D LIDAR-based System for Long-term and Wide-area People Behavior Measurement, IEEE Transactions on Human-Machine Systems (under review) [PDF].
-
-## Contact
-Kenji Koide, Active Intelligent Systems Laboratory, Toyohashi University of Technology <a href="http://www.aisl.cs.tut.ac.jp">[URL]</a> <br>
-koide@aisl.cs.tut.ac.jp
-
