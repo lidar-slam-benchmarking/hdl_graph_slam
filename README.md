@@ -1,34 +1,25 @@
 # hdl_graph_slam
-***hdl_graph_slam*** is an open source ROS package for real-time 3D slam using a 3D LIDAR. It is based on 3D Graph SLAM with NDT scan matching-based odometry estimation and loop detection. It also utilizes floor plane detection to generate an environmental map with a completely flat floor. We have tested this packaged mainly in indoor environments, but it can be applied to outdoor environment mapping as well.
+
+***Disclaimer:*** The original work can be found at https://github.com/koide3/hdl_graph_slam and we take no credit for the author's work.
+
+hdl_graph_slam is an open source ROS package for real-time 3D slam using a 3D LIDAR. It is based on 3D Graph SLAM with NDT scan matching-based odometry estimation and loop detection. It also utilizes floor plane detection to generate an environmental map with a completely flat floor. We have tested this packaged mainly in indoor environments, but it can be applied to outdoor environment mapping as well.
+
+## Results
+***Husky Dataset Results***
+
+<a href="https://drive.google.com/file/d/1Snvz9VU2-CtfGEVY1_JzVO7b-XaeRaFL/view?usp=sharing">video link</a>
 
 <img src="imgs/hdl_graph_slam.png" width="712pix" />
 
-<a href="https://drive.google.com/open?id=0B9f5zFkpn4soSG96Tkt4SFFTbms">video</a>
+***Quad Dataset Results***
 
-## Nodelets
-***hdl_graph_slam*** consists of four nodelets. 
-- *prefiltering_nodelet*
-- *scan_matching_odometry_nodelet*
-- *floor_detection_nodelet*
-- *hdl_graph_slam_nodelet*
+<a href="https://drive.google.com/file/d/1dji3F1K1WyiPXrWMNWNLNFjQwYLJgAue/view?usp=sharing">video link</a>
 
-The input point cloud is first downsampled by *prefiltering_nodelet*, and then passed to the next nodelets. While *scan_matching_odometry_nodelet* estimates the sensor pose by iteratively applying a scan matching between consecutive frames (i.e., odometry estimation), *floor_detection_nodelet* detects floor planes by RANSAC. The estimated odometry and the detected floor planes are sent to *hdl_graph_slam*. To compensate the accumulated error of the scan matching, it performs loop detection and optimizes a pose graph which takes odometry, loops, and floor planes into account.<br>
-
-**[Sep/1/2017]** A GPS-based graph optimization has been implemented. *hdl_graph_slam_nodelet* receives GPS data (i.e., latitude, longitude) from */gps/geopoint* and converts them into the UTM coordinate, and then it adds them into the pose graph. It effectively compensate the scan matching error in outdoor environments.
-
-<br>
-<img src="imgs/nodelets.png" width="712pix" />
-
-### Parameters
-All the parameters are listed in *launch/hdl_graph_slam.launch* as ros params.
-
-### Services
-- */hdl_graph_slam/dump*  (std_srvs/Empty)
-  - save all data (point clouds, floor coeffs, odoms, and pose graph) to the current directory.
-- */hdl_graph_slam/save_map*  (hdl_graph_slam/SaveMap)
-  - save generated map as a PCD file.
+<img src="imgs/hdl_graph_slam.png" width="712pix" />
 
 ## Requirements
+*Note that this package should be installed in ROS indigo in Ubuntu 14.04*
+
 ***hdl_graph_slam*** requires the following libraries:
 - OpenMP
 - PCL 1.7
