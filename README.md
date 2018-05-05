@@ -5,17 +5,17 @@
 hdl_graph_slam is an open source ROS package for real-time 3D slam using a 3D LIDAR. It is based on 3D Graph SLAM with NDT scan matching-based odometry estimation and loop detection. It also utilizes floor plane detection to generate an environmental map with a completely flat floor. We have tested this packaged mainly in indoor environments, but it can be applied to outdoor environment mapping as well.
 
 ## Results
-***Husky Dataset Results***
+***Husky Dataset***
 
 <a href="https://drive.google.com/file/d/1Snvz9VU2-CtfGEVY1_JzVO7b-XaeRaFL/view?usp=sharing">video link</a>
 
-<img src="imgs/hdl_graph_slam.png" width="712pix" />
+<img src="imgs/husky.png" width="712pix" />
 
-***Quad Dataset Results***
+***Quad Dataset***
 
 <a href="https://drive.google.com/file/d/1dji3F1K1WyiPXrWMNWNLNFjQwYLJgAue/view?usp=sharing">video link</a>
 
-<img src="imgs/hdl_graph_slam.png" width="712pix" />
+<img src="imgs/quad.png" width="712pix" />
 
 ## Requirements
 *Note that this package should be installed in ROS indigo in Ubuntu 14.04*
