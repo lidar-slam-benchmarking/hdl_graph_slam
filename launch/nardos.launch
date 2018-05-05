@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+
+<param name="/use_sim_time" value="true"/>
+<include file="$(find hdl_graph_slam)/launch/hdl_graph_slam_ford.launch"/>
+
+<remap from="/dji_sdk/gps_position" to="/gps/geopoint"/> <!-- Lat/Long -->
+
+<!-- PLAYBACK -->
+<node pkg="rosbag" type="play" name="rosbagplay" args="$(find hdl_graph_slam)/../../bags/nardo3.bag --clock -d 5 -r 1" required="true"/>
+
+	<!--VISUALIZATION -->
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find hdl_graph_slam)/rviz/hdl_graph_slam.rviz"/>
+
+</launch>

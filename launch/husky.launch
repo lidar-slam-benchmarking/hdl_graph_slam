@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+<param name="/use_sim_time" value="true"/>
+<include file="$(find hdl_graph_slam)/launch/hdl_graph_slam_501.launch"/>
+
+<!--VISUALIZATION -->
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find hdl_graph_slam)/rviz/hdl_graph_slam.rviz"/>
+
+</launch>
