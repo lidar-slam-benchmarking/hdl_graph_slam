@@ -43,11 +43,11 @@ sudo make install
 
 The following ROS packages are required:
 - geodesy
-- nmea_msgs
-- pcl_ros
+- nmea-msgs
+- pcl-ros
 - <a href="https://github.com/koide3/ndt_omp">ndt_omp</a>
 ```bash
-sudo apt-get install ros-indigo-geodesy ros-indigo-pcl_ros ros-indigo-nmea-msgs
+sudo apt-get install ros-indigo-geodesy ros-indigo-pcl-ros ros-indigo-nmea-msgs
 
 cd catkin_ws/src
 git clone https://github.com/koide3/ndt_omp.git
